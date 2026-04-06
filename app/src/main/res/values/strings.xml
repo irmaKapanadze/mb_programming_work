@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">mb_programming_work</string>
+    <string name="shop">Shop</string>
+    <string name="clothing">Clothing</string>
+    <string name="cost">$ %,.0f</string>
+    <string name="payment">Payment</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="item">Item</string>
+    <string name="shipping_options">Shipping Options</string>
+    <string name="standard">Standard</string>
+    <string name="free">free</string>
+    <string name="express">Express</string>
+    <string name="pay">Pay</string>
+    <string name="result_message">You card has been successfully charged</string>
+    <string name="done">Done!</string>
+    <string name="go_first_page">Go To First Page</string>
+    <string name="discount">%1$d%% discount</string>
+    <string name="total">Total</string>
+</resources>

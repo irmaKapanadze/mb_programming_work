@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="light_purple">#E5EBFC</color>
+    <color name="blue">#0042E0</color>
+    <color name="background_light_gray">#F5F5F5</color>
+    <color name="grey">#F9F9F9</color>
+    <color name="blue_v2">#004BFE</color>
+    <color name="purple_blue">#E5EBFC</color>
+    <color name="light_black">#202020</color>
+    <color name="light_grey">#E7E8EB</color>
+</resources>
