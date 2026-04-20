@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ik_result_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".result.ResultFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ik_title_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/blue"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ik_card_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingVertical="16dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ik_table_icon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/table_alt_svgrepo_com" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ik_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_medium"
+                android:text="@string/result_title"
+                android:textColor="@color/white"
+                android:textFontWeight="800"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_salary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/salary"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_title_card" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_salary_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_salary"
+        app:layout_constraintTop_toTopOf="@id/ik_salary" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_expenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/total_expenses"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_salary" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_expenses_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_expenses"
+        app:layout_constraintTop_toTopOf="@id/ik_expenses" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_saving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/saving_percent"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_expenses" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_saving_percent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_saving"
+        app:layout_constraintTop_toTopOf="@id/ik_saving" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_total_saving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/total_savings"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_saving" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_total_saving_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_total_saving"
+        app:layout_constraintTop_toTopOf="@id/ik_total_saving" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/full_name"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_total_saving" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/ik_identity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_identity"
+        app:layout_constraintTop_toTopOf="@id/ik_identity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:text="@string/birth_year"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ik_identity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ik_birth_year"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/nunito_sans_medium"
+        android:gravity="end"
+        android:textFontWeight="700"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ik_birth"
+        app:layout_constraintTop_toTopOf="@id/ik_birth" />
+</androidx.constraintlayout.widget.ConstraintLayout>
