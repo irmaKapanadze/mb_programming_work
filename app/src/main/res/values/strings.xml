@@ -1,22 +1,16 @@
 <resources>
     <string name="app_name">mb_programming_work</string>
-    <string name="input">input</string>
-    <string name="result">result</string>
-    <string name="personal_finance_manager">Personal Finance Manager</string>
-    <string name="salary">Salary</string>
-    <string name="rent">Rent</string>
-    <string name="food">Food</string>
-    <string name="salary_input">Enter your salary</string>
-    <string name="rent_input">Enter your rent</string>
-    <string name="food_input">Enter money spent on food</string>
-    <string name="calculate">calculate</string>
-    <string name="error_text">fill all of the fields correctly!</string>
-    <string name="result_title">Results</string>
-    <string name="total_expenses">Total expenses</string>
-    <string name="total_savings">Total savings</string>
-    <string name="saving_percent">Saving percent</string>
-    <string name="blank_string">%.2f</string>
-    <string name="percent">%1$d%%</string>
-    <string name="full_name">Full name</string>
-    <string name="birth_year">Birth year</string>
+    <string name="form_title">Student Form</string>
+    <string name="form_subtitle">Fill in your details</string>
+    <string name="label_name">Your Name</string>
+    <string name="placeholder_name">Enter your name</string>
+    <string name="label_last_name">Your Last Name</string>
+    <string name="placeholder_last_name">Enter your last name</string>
+    <string name="label_date">Select Date</string>
+    <string name="placeholder_date">Pick a date</string>
+    <string name="label_email">Your Email</string>
+    <string name="placeholder_email">Enter your email</string>
+    <string name="radio_title">Choose Your Favorite Direction</string>
+    <string name="switch_terms">I agree to terms and conditions</string>
+    <string name="btn_submit">Submit</string>
 </resources>
