@@ -29,7 +29,6 @@ fun StudentForm(
 ) {
     //uzrunvelyops recomposition-s monacemta cvlilebisas
     val nameState by viewModel.nameState.collectAsState()
-    val lastNameState by viewModel.lastNameState.collectAsState()
     val dateState by viewModel.dateState.collectAsState()
     val emailState by viewModel.emailState.collectAsState()
     val selectedOption by viewModel.selectedOption.collectAsState()
@@ -105,30 +104,9 @@ fun StudentForm(
             shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MyTheme.colors.surface,
-                unfocusedBorderColor = MyTheme.colors.primary
-            )
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-
-        Text(
-            text = stringResource(R.string.label_last_name),
-            style = MyTheme.typography.bodyLarge,
-            color = MyTheme.colors.onBackground,
-            modifier = Modifier.padding(12.dp, 8.dp)
-        )
-        OutlinedTextField(
-            value = lastNameState,
-            onValueChange = { viewModel.onLastNameChange(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 4.dp),
-            placeholder = { Text(stringResource(R.string.placeholder_last_name)) },
-            shape = RoundedCornerShape(8.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MyTheme.colors.surface,
-                unfocusedBorderColor = MyTheme.colors.primary
+                unfocusedContainerColor = MyTheme.colors.surface,
+                unfocusedBorderColor = MyTheme.colors.primary,
+                focusedBorderColor = MyTheme.colors.primary
             )
         )
 
@@ -140,38 +118,41 @@ fun StudentForm(
             color = MyTheme.colors.onBackground,
             modifier = Modifier.padding(12.dp, 8.dp)
         )
-        OutlinedTextField(
-            value = dateState,
-            onValueChange = {},
-            readOnly = true,
+
+        //box-shi vputavt teqstur vels,rom clickma imushavos mtel velze
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 4.dp)
-                .clickable { datePickerDialog.show() },
-            enabled = false,
-            placeholder = { Text(stringResource(R.string.placeholder_date)) },
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.calendar_svgrepo_com),
-                    contentDescription = "Calendar Icon",
-                    tint = MyTheme.colors.textSecondary,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable { datePickerDialog.show() }
+                .clickable { datePickerDialog.show() } //kalendris chveneba
+        ) {
+            OutlinedTextField(
+                value = dateState,
+                onValueChange = {}, //carielia,radgan xelit arapers vwert
+                readOnly = true,
+                enabled = false, // etisheba shida click rom box interaqcia ar daiblokos
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text(stringResource(R.string.placeholder_date)) },
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.calendar_svgrepo_com),
+                        contentDescription = "Calendar Icon",
+                        tint = MyTheme.colors.textSecondary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
+                shape = RoundedCornerShape(8.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    disabledContainerColor = MyTheme.colors.surface,
+                    disabledBorderColor = MyTheme.colors.primary,
+                    disabledTextColor = MyTheme.colors.onBackground,
+                    disabledPlaceholderColor = MyTheme.colors.textSecondary,
+                    disabledTrailingIconColor = MyTheme.colors.textSecondary
                 )
-            },
-            shape = RoundedCornerShape(8.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                disabledTextColor = MyTheme.colors.onBackground,
-                disabledBorderColor = MyTheme.colors.primary,
-                disabledPlaceholderColor = MyTheme.colors.textSecondary,
-                disabledTrailingIconColor = MyTheme.colors.textSecondary,
-                disabledContainerColor = MyTheme.colors.surface
             )
-        )
+        }
 
         Spacer(Modifier.height(16.dp))
-
 
         Text(
             text = stringResource(R.string.label_email),
@@ -189,7 +170,9 @@ fun StudentForm(
             shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MyTheme.colors.surface,
-                unfocusedBorderColor = MyTheme.colors.primary
+                unfocusedContainerColor = MyTheme.colors.surface,
+                unfocusedBorderColor = MyTheme.colors.primary,
+                focusedBorderColor = MyTheme.colors.primary
             )
         )
 
@@ -255,6 +238,8 @@ fun StudentForm(
                 )
             )
         }
+
+        Spacer(Modifier.height(24.dp))
 
         Button(
             onClick = {

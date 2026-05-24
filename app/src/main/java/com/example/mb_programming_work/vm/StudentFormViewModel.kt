@@ -12,10 +12,6 @@ class StudentFormViewModel : ViewModel() {
     private val _nameState = MutableStateFlow("")
     val nameState: StateFlow<String> = _nameState.asStateFlow()
 
-    //gvari-
-    private val _lastNameState = MutableStateFlow("")
-    val lastNameState: StateFlow<String> = _lastNameState.asStateFlow()
-
     //tarighi
     private val _dateState = MutableStateFlow("")
     val dateState: StateFlow<String> = _dateState.asStateFlow()
@@ -38,10 +34,6 @@ class StudentFormViewModel : ViewModel() {
         _nameState.value = newValue
     }
 
-    fun onLastNameChange(newValue: String) {
-        _lastNameState.value = newValue
-    }
-
     fun onDateChange(newValue: String) {
         _dateState.value = newValue
     }
@@ -62,7 +54,6 @@ class StudentFormViewModel : ViewModel() {
     //es punkcia gamoiyeneba field-ebis validaciistvis
     fun validateForm(): Boolean {
         return _nameState.value.isNotBlank() &&
-                _lastNameState.value.isNotBlank() &&
                 _dateState.value.isNotBlank() &&
                 _emailState.value.isNotBlank() &&
                 _selectedOption.value.isNotBlank() &&
