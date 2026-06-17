@@ -8,16 +8,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.mb_programming_work.R
 
-/*mtavar font sawiroa,rom muki,ghia,an regularuli versiis motxovnisas,avtomaturad iyos gamoyenebuli
-comfortaa font.
- */
+
 val main_font = FontFamily(
     Font(R.font.comfortaa_light, FontWeight.Light),
     Font(R.font.comfortaa_regular, FontWeight.Normal),
     Font(R.font.comfortaa_bold, FontWeight.Bold)
 )
 
-//typography-s monacemta modeli
+
 data class MyTypography(
     val headlineLarge: TextStyle,
     val headlineMedium: TextStyle,
@@ -28,7 +26,7 @@ data class MyTypography(
     val bodySmallest: TextStyle,
 )
 
-//typography stilebi
+
 val MyAppTypography = MyTypography(
     headlineLarge = TextStyle(
         fontFamily = main_font,
@@ -77,7 +75,6 @@ val MyAppTypography = MyTypography(
     )
 )
 
-//sawiroa imisatvis,rom kodis nebismieri adgilidan gamoviyenot,magalitad:MyAppTheme.typography.headlineLarge
-val LocalAppTypography = staticCompositionLocalOf<MyTypography> {
+val LocalTypography = staticCompositionLocalOf<MyTypography> {
     error("MyTypography not provided")
 }

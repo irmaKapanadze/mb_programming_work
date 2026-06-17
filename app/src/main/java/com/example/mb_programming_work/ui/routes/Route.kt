@@ -2,6 +2,11 @@ package com.example.mb_programming_work.ui.routes
 
 import kotlinx.serialization.Serializable
 
-//komponentis marshruti type-safe navigaciistvis
 @Serializable
-object StudentFormRoute
+object MenuRoute
+
+@Serializable
+object LoginRoute
+
+@Serializable
+object RegisterRoute

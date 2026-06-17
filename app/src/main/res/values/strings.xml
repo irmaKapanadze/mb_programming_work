@@ -1,16 +1,8 @@
 <resources>
-    <string name="app_name">mb_programming_work</string>
-    <string name="form_title">Student Form</string>
-    <string name="form_subtitle">Fill in your details</string>
-    <string name="label_name">Your Name</string>
-    <string name="placeholder_name">Enter your name</string>
-    <string name="label_last_name">Your Last Name</string>
-    <string name="placeholder_last_name">Enter your last name</string>
-    <string name="label_date">Select Date</string>
-    <string name="placeholder_date">Pick a date</string>
-    <string name="label_email">Your Email</string>
-    <string name="placeholder_email">Enter your email</string>
-    <string name="radio_title">Choose Your Favorite Direction</string>
-    <string name="switch_terms">I agree to terms and conditions</string>
-    <string name="btn_submit">Submit</string>
+    <string name="app_name">Cinemina</string>
+    <string name="login">log in</string>
+    <string name="register">register</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
 </resources>

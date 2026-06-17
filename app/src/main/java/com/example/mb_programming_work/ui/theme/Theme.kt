@@ -1,43 +1,31 @@
 package com.example.mb_programming_work.ui.theme
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
+
 @Composable
-fun MyAppTheme(
+fun MyTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    //material3-is standartul perebs chveni perebit vcvlit
-    val materialColorScheme = lightColorScheme(
-        background = LightAppColors.background,
-        onBackground = LightAppColors.onBackground,
-        surface = LightAppColors.surface,
-        primary = LightAppColors.primary,
-        onPrimary = LightAppColors.onPrimary,
-        outline = LightAppColors.outline
-    )
+    val colors = if (darkTheme) DarkAppColors else LightAppColors
 
-    //local cvladebis inicializacia  rata temis monacemebi xelmisawvdomi gaxdes globalurad
     CompositionLocalProvider(
-        LocalMyAppColors provides LightAppColors,
-        LocalAppTypography provides MyAppTypography
+        LocalColors provides colors,
+        LocalTypography provides MyAppTypography
     ) {
-        MaterialTheme(
-            colorScheme = materialColorScheme,
-            content = content
-        )
+        content()
     }
 }
 
-// damxmare obieqti rom martivad davwerot,mag: MyTheme.colors.primary
 object MyTheme {
     val colors: MyAppColors
         @Composable
-        get() = LocalMyAppColors.current
+        get() = LocalColors.current
 
     val typography: MyTypography
         @Composable
-        get() = LocalAppTypography.current
+        get() = LocalTypography.current
 }
