@@ -42,7 +42,7 @@ fun LoginScreen(
     onBackClick: () -> Unit,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = viewModel(),
+    viewModel: LoginViewModel = viewModel()
 ) {
     val loginState by viewModel.state.collectAsState()
     val context = LocalContext.current

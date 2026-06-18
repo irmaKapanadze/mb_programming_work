@@ -19,13 +19,15 @@ import com.example.mb_programming_work.navigation.routes.MainGraph
 import com.example.mb_programming_work.navigation.routes.MenuRoute
 import com.example.mb_programming_work.navigation.routes.ProfileRoute
 import com.example.mb_programming_work.navigation.routes.RegisterRoute
+import com.example.mb_programming_work.ui.screens.favorites.FavoritesScreen
 import com.example.mb_programming_work.ui.screens.home.HomeScreen
-import com.example.mb_programming_work.ui.screens.home.ProfileScreen
+import com.example.mb_programming_work.ui.screens.profile.ProfileScreen
 import com.example.mb_programming_work.ui.screens.login.LoginScreen
 import com.example.mb_programming_work.ui.screens.menu.MenuScreen
 import com.example.mb_programming_work.ui.screens.register.RegisterScreen
 import com.example.mb_programming_work.ui.theme.MyTheme
 import com.google.firebase.auth.FirebaseAuth
+import com.example.mb_programming_work.navigation.routes.FavoritesRoute
 
 @Composable
 fun MyAppNavigation(modifier: Modifier = Modifier) {
@@ -55,8 +57,16 @@ fun MyAppNavigation(modifier: Modifier = Modifier) {
             composable<MenuRoute> {
                 MenuScreen(
                     modifier = modifier,
-                    onLoginClick = { navController.navigate(LoginRoute) { launchSingleTop = true } },
-                    onRegisterClick = { navController.navigate(RegisterRoute) { launchSingleTop = true } }
+                    onLoginClick = {
+                        navController.navigate(LoginRoute) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onRegisterClick = {
+                        navController.navigate(RegisterRoute) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
 
@@ -87,6 +97,9 @@ fun MyAppNavigation(modifier: Modifier = Modifier) {
             navigation<MainGraph>(startDestination = HomeRoute) {
                 homeNavGraph(navController)
                 profileNavGraph(navController)
+                composable<FavoritesRoute> {
+                    FavoritesScreen({ navController.popBackStack() })
+                }
             }
         }
     }
@@ -103,7 +116,14 @@ fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
 fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
     composable<ProfileRoute> {
         ProfileScreen(
-
+            {
+            navController.navigate(FavoritesRoute)
+            },
+            {
+                navController.navigate(MenuRoute) {
+                    popUpTo(0) { inclusive = true }
+                }
+            }
         )
     }
 }
