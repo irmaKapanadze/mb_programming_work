@@ -25,13 +25,13 @@ class RegisterViewModel : ViewModel() {
 
             is RegisterEvent.OnPassword2Change -> {
                 _state.update {
-                    it.copy(email = event.password2)
+                    it.copy(password2 = event.password2)
                 }
             }
 
             is RegisterEvent.OnPasswordChange -> {
                 _state.update {
-                    it.copy(email = event.password)
+                    it.copy(password = event.password)
                 }
             }
 
