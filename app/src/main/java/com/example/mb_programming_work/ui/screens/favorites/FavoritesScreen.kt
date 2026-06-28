@@ -34,7 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.mb_programming_work.R
-import com.example.mb_programming_work.ui.screens.home.model.MovieUi
+import com.example.mb_programming_work.ui.screens.home.model.Movie
 import com.example.mb_programming_work.ui.theme.MyTheme
 import com.example.mb_programming_work.vm.FavoritesViewModel
 
@@ -42,7 +42,7 @@ import com.example.mb_programming_work.vm.FavoritesViewModel
 fun FavoritesScreen(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: FavoritesViewModel = viewModel()
+    viewModel: FavoritesViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -114,7 +114,7 @@ fun FavoritesScreen(
                         MovieItem(
                             item = movie,
                             isFavorite = true,
-                            onFavouriteClick =  {
+                            onFavouriteClick = {
                                 viewModel.onEvent(
                                     FavoritesEvent.OnUnfavouriteClick(
                                         movie
@@ -133,9 +133,9 @@ fun FavoritesScreen(
 
 @Composable
 fun MovieItem(
-    item: MovieUi,
+    item: Movie,
     isFavorite: Boolean,
-    onFavouriteClick: () -> Unit
+    onFavouriteClick: () -> Unit,
 ) {
     Box(
         Modifier
@@ -143,9 +143,11 @@ fun MovieItem(
             .height(150.dp)
             .clip(RoundedCornerShape(12.dp))
     ) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(end = 48.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 48.dp)
+        ) {
             AsyncImage(
                 model = item.imageUrl,
                 contentDescription = null,
@@ -224,8 +226,8 @@ fun MovieItem(
 
 @Composable
 @Preview
-fun FavoritesScreenPreview(){
-    MyTheme{
+fun FavoritesScreenPreview() {
+    MyTheme {
         FavoritesScreen({})
     }
 }

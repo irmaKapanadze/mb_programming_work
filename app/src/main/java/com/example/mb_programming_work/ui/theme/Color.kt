@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 data class MyAppColors(
     val background: Color,
-    val onBackground:Color,
+    val onBackground: Color,
     val surface: Color,
     val primary: Color,
     val onPrimary: Color,
@@ -13,18 +13,18 @@ data class MyAppColors(
     val textSecondary: Color,
     val border: Color,
     val accent: Color,
-    val avatarBorder:Color,
+    val avatarBorder: Color,
     val surfaceVariant: Color,
     val primaryContainer: Color,
     val onPrimaryContainer: Color,
     val outline: Color,
-    val transparentBack:Color = Color.Transparent,
-    val card:Color,
-    val destructiveColor: Color=Color(0xFFD32F2F),
-    val macroCircleBackground:Color=Color.LightGray,
-    val protein:Color=Color(0xFFFF7043),
-    val fat:Color=Color(0xFFFFD54F),
-    val carbs:Color=Color(0xFF81D4FA),
+    val transparentBack: Color = Color.Transparent,
+    val card: Color,
+    val destructiveColor: Color = Color(0xFFD32F2F),
+    val macroCircleBackground: Color = Color.LightGray,
+    val protein: Color = Color(0xFFFF7043),
+    val fat: Color = Color(0xFFFFD54F),
+    val carbs: Color = Color(0xFF81D4FA),
 )
 
 val LightAppColors = MyAppColors(

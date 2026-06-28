@@ -3,18 +3,18 @@ package com.example.mb_programming_work.vm
 import android.content.Context
 import android.util.Patterns
 import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mb_programming_work.data.LoginRepository
 import com.example.mb_programming_work.ui.screens.login.LogInState
 import com.example.mb_programming_work.ui.screens.login.LoginEvent
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
-
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val repository = LoginRepository()
 
     private val _state = MutableStateFlow(LogInState(email = "", password = ""))
     val state = _state.asStateFlow()
@@ -51,14 +51,19 @@ class LoginViewModel : ViewModel() {
 
         _state.update { it.copy(isLoading = true) }
 
-        auth.signInWithEmailAndPassword(currentEmail, currentPassword)
-            .addOnSuccessListener {
-                _state.update { it.copy(isLoading = false, isSuccess = true) }
-            }
-            .addOnFailureListener { exception ->
-                _state.update { it.copy(isLoading = false, isSuccess = false) }
-                val errorMessage = exception.localizedMessage ?:"error"
-                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-            }
+        viewModelScope.launch {
+            val result = repository.loginUser(currentEmail, currentPassword)
+
+            result.fold(
+                onSuccess = {
+                    _state.update { it.copy(isLoading = false, isSuccess = true) }
+                },
+                onFailure = { exception ->
+                    _state.update { it.copy(isLoading = false, isSuccess = false) }
+                    val errorMessage = exception.localizedMessage ?: "error"
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                }
+            )
+        }
     }
 }

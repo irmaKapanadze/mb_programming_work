@@ -8,6 +8,7 @@ import com.example.mb_programming_work.navigation.MyAppNavigation
 import com.example.mb_programming_work.ui.theme.MyTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

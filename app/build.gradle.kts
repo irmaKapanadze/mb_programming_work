@@ -66,6 +66,8 @@ dependencies {
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences.core)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 

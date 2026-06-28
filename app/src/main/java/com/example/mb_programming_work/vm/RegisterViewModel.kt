@@ -4,35 +4,33 @@ import android.content.Context
 import android.util.Patterns
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mb_programming_work.data.RegisterRepository
 import com.example.mb_programming_work.ui.screens.register.RegisterEvent
 import com.example.mb_programming_work.ui.screens.register.RegisterState
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val repository = RegisterRepository()
+
     private val _state = MutableStateFlow(RegisterState(email = "", password = "", password2 = ""))
     val state = _state.asStateFlow()
+
     fun onEvent(event: RegisterEvent) {
         when (event) {
             is RegisterEvent.OnEmailChange -> {
-                _state.update {
-                    it.copy(email = event.email)
-                }
+                _state.update { it.copy(email = event.email) }
             }
 
             is RegisterEvent.OnPassword2Change -> {
-                _state.update {
-                    it.copy(password2 = event.password2)
-                }
+                _state.update { it.copy(password2 = event.password2) }
             }
 
             is RegisterEvent.OnPasswordChange -> {
-                _state.update {
-                    it.copy(password = event.password)
-                }
+                _state.update { it.copy(password = event.password) }
             }
 
             is RegisterEvent.OnRegisterClick -> {
@@ -72,14 +70,19 @@ class RegisterViewModel : ViewModel() {
 
         _state.update { it.copy(isLoading = true) }
 
-        auth.createUserWithEmailAndPassword(currentEmail, currentPassword)
-            .addOnSuccessListener {
-                _state.update { it.copy(isLoading = false, isSuccess = true) }
-            }
-            .addOnFailureListener { exception ->
-                _state.update { it.copy(isLoading = false, isSuccess = false) }
-                val errorMessage = exception.localizedMessage ?: "error"
-                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-            }
+        viewModelScope.launch {
+            val result = repository.registerUser(currentEmail, currentPassword)
+
+            result.fold(
+                onSuccess = {
+                    _state.update { it.copy(isLoading = false, isSuccess = true) }
+                },
+                onFailure = { exception ->
+                    _state.update { it.copy(isLoading = false, isSuccess = false) }
+                    val errorMessage = exception.localizedMessage ?: "error"
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                }
+            )
+        }
     }
 }

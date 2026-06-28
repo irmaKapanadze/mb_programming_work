@@ -2,26 +2,21 @@ package com.example.mb_programming_work.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mb_programming_work.data.MovieRepository
 import com.example.mb_programming_work.ui.screens.home.HomeEvent
 import com.example.mb_programming_work.ui.screens.home.HomeState
-import com.example.mb_programming_work.ui.screens.home.model.MovieUi
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.mb_programming_work.ui.screens.home.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class HomeViewModel : ViewModel() {
+    private val repository = MovieRepository()
 
     private val _state = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
-
-    private val db = Firebase.firestore
-    private val auth = FirebaseAuth.getInstance()
 
     init {
         loadMovies()
@@ -62,79 +57,25 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun toggleFavourite(movie: MovieUi) {
-        val userId = auth.currentUser?.uid ?: return
-
-        val docRef = db.collection("users")
-            .document(userId)
-            .collection("favorites")
-            .document(movie.id)
-
+    private fun toggleFavourite(movie: Movie) {
         val isFavourite = _state.value.favouriteMovies.contains(movie)
-
-        if (isFavourite) {
-            docRef.delete()
-        } else {
-            docRef.set(movie)
+        viewModelScope.launch {
+            repository.toggleFavorite(movie, isCurrentlyFavorite = isFavourite)
         }
     }
 
     private fun observeFirebaseFavorites() {
-        val userId = auth.currentUser?.uid ?: return
-
-        db.collection("users")
-            .document(userId)
-            .collection("favorites")
-            .addSnapshotListener { snapshot, error ->
-                if (error != null || snapshot == null) return@addSnapshotListener
-
-                val favoriteList = snapshot.documents.mapNotNull { document ->
-                    val data = document.data ?: return@mapNotNull null
-                    MovieUi(
-                        id = document.id,
-                        title = data["title"] as? String ?: "",
-                        description = data["description"] as? String ?: "",
-                        imageUrl = data["imageUrl"] as? String ?: "",
-                        rating = (data["rating"] as? Long)?.toInt() ?: 0,
-                        releaseYear = (data["releaseYear"] as? Long)?.toInt() ?: 0,
-                        genre = data["genre"] as? String ?: "",
-                        duration = data["duration"] as? String ?: "",
-                        cast = (data["cast"] as? List<*>)?.mapNotNull { it as? String } ?: emptyList(),
-                        videoUrl = data["videoUrl"] as? String ?: ""
-                    )
-                }
-
+        viewModelScope.launch {
+            repository.observeFavorites().collect { favoriteList ->
                 _state.update { it.copy(favouriteMovies = favoriteList) }
             }
+        }
     }
 
     private fun loadMovies() {
         viewModelScope.launch {
-            try {
-                val snapshot = db.collection("movies").get().await()
-
-                val moviesList = snapshot.documents.mapNotNull { document ->
-                    val data = document.data ?: return@mapNotNull null
-
-                    MovieUi(
-                        id = document.id,
-                        title = data["title"] as? String ?: "",
-                        description = data["description"] as? String ?: "",
-                        imageUrl = data["imageUrl"] as? String ?: "",
-                        rating = (data["rating"] as? Long)?.toInt() ?: 0,
-                        releaseYear = (data["releaseYear"] as? Long)?.toInt() ?: 0,
-                        genre = data["genre"] as? String ?: "",
-                        duration = data["duration"] as? String ?: "",
-                        cast = (data["cast"] as? List<*>)?.mapNotNull { it as? String } ?: emptyList(),
-                        videoUrl = data["videoUrl"] as? String ?: ""
-                    )
-                }
-
-                _state.update { it.copy(movies = moviesList) }
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            val moviesList = repository.getAllMovies()
+            _state.update { it.copy(movies = moviesList) }
         }
     }
 }

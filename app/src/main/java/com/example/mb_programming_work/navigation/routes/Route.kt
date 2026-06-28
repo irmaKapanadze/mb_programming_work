@@ -16,8 +16,10 @@ object RegisterRoute
 @Serializable
 object MainGraph
 
-@Serializable object HomeRoute
-@Serializable object ProfileRoute
+@Serializable
+object HomeRoute
+@Serializable
+object ProfileRoute
 
 @Serializable
 object FavoritesRoute

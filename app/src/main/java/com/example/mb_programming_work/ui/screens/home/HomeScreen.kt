@@ -43,7 +43,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.mb_programming_work.R
-import com.example.mb_programming_work.ui.screens.home.model.MovieUi
+import com.example.mb_programming_work.ui.screens.home.model.Movie
 import com.example.mb_programming_work.ui.theme.MyTheme
 import com.example.mb_programming_work.ui.theme.components.MyAppTextField
 import com.example.mb_programming_work.vm.HomeViewModel
@@ -196,7 +196,7 @@ fun CategoryItem(
 
 @Composable
 fun MovieItem(
-    item: MovieUi,
+    item: Movie,
     isSelected: Boolean,
     onFavouriteClick: () -> Unit,
     onItemClick: () -> Unit,
@@ -212,9 +212,11 @@ fun MovieItem(
                 }
             )
     ) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(end = 48.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 48.dp)
+        ) {
             AsyncImage(
                 model = item.imageUrl,
                 contentDescription = null,
@@ -293,7 +295,7 @@ fun MovieItem(
 
 @Composable
 fun BottomSheet(
-    item: MovieUi,
+    item: Movie,
 ) {
     Column(
         modifier = Modifier
@@ -415,7 +417,7 @@ fun BottomSheet(
 }
 
 @Composable
-fun InfoCard(item: MovieUi) {
+fun InfoCard(item: Movie) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

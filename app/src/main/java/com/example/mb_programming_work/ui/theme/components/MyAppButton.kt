@@ -29,7 +29,7 @@ fun MyAppButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    type: AppButtonType = AppButtonType.Primary
+    type: AppButtonType = AppButtonType.Primary,
 ) {
     val colors = LocalColors.current
     val typography = LocalTypography.current
@@ -37,7 +37,8 @@ fun MyAppButton(
     val backgroundColor = when (type) {
         AppButtonType.Primary -> colors.primary
         AppButtonType.Secondary,
-        AppButtonType.Outlined -> colors.surface
+        AppButtonType.Outlined,
+            -> colors.surface
 
         AppButtonType.Accent -> colors.accent
     }

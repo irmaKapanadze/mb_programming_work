@@ -95,7 +95,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier) {
             }
 
             navigation<MainGraph>(startDestination = HomeRoute) {
-                homeNavGraph(navController)
+                homeNavGraph()
                 profileNavGraph(navController)
                 composable<FavoritesRoute> {
                     FavoritesScreen({ navController.popBackStack() })
@@ -105,7 +105,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier) {
     }
 }
 
-fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
+fun NavGraphBuilder.homeNavGraph() {
     composable<HomeRoute> {
         HomeScreen(
 
@@ -117,7 +117,7 @@ fun NavGraphBuilder.profileNavGraph(navController: NavHostController) {
     composable<ProfileRoute> {
         ProfileScreen(
             {
-            navController.navigate(FavoritesRoute)
+                navController.navigate(FavoritesRoute)
             },
             {
                 navController.navigate(MenuRoute) {

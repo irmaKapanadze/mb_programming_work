@@ -1,24 +1,23 @@
 package com.example.mb_programming_work.vm
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mb_programming_work.data.MovieRepository
 import com.example.mb_programming_work.ui.screens.favorites.FavoritesEvent
 import com.example.mb_programming_work.ui.screens.favorites.FavoritesState
-import com.example.mb_programming_work.ui.screens.home.model.MovieUi
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.mb_programming_work.ui.screens.home.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class FavoritesViewModel : ViewModel() {
 
+    private val repository = MovieRepository()
+
     private val _state = MutableStateFlow(FavoritesState())
     val state: StateFlow<FavoritesState> = _state.asStateFlow()
-
-    private val db = Firebase.firestore
-    private val auth = FirebaseAuth.getInstance()
 
     init {
         observeFavorites()
@@ -33,36 +32,9 @@ class FavoritesViewModel : ViewModel() {
     }
 
     private fun observeFavorites() {
-        val userId = auth.currentUser?.uid ?: return
-
         _state.update { it.copy(isLoading = true) }
-
-        db.collection("users")
-            .document(userId)
-            .collection("favorites")
-            .addSnapshotListener { snapshot, error ->
-                if (error != null || snapshot == null) {
-                    _state.update { it.copy(isLoading = false) }
-                    return@addSnapshotListener
-                }
-
-                val favoriteList = snapshot.documents.mapNotNull { document ->
-                    val data = document.data ?: return@mapNotNull null
-                    MovieUi(
-                        id = document.id,
-                        title = data["title"] as? String ?: "",
-                        description = data["description"] as? String ?: "",
-                        imageUrl = data["imageUrl"] as? String ?: "",
-                        rating = (data["rating"] as? Long)?.toInt() ?: 0,
-                        releaseYear = (data["releaseYear"] as? Long)?.toInt() ?: 0,
-                        genre = data["genre"] as? String ?: "",
-                        duration = data["duration"] as? String ?: "",
-                        cast = (data["cast"] as? List<*>)?.mapNotNull { it as? String }
-                            ?: emptyList(),
-                        videoUrl = data["videoUrl"] as? String ?: ""
-                    )
-                }
-
+        viewModelScope.launch {
+            repository.observeFavorites().collect { favoriteList ->
                 _state.update {
                     it.copy(
                         favoriteMovies = favoriteList,
@@ -70,15 +42,12 @@ class FavoritesViewModel : ViewModel() {
                     )
                 }
             }
+        }
     }
 
-    private fun removeFromFavorites(movie: MovieUi) {
-        val userId = auth.currentUser?.uid ?: return
-
-        db.collection("users")
-            .document(userId)
-            .collection("favorites")
-            .document(movie.id)
-            .delete()
+    private fun removeFromFavorites(movie: Movie) {
+        viewModelScope.launch {
+            repository.toggleFavorite(movie, isCurrentlyFavorite = true)
+        }
     }
 }

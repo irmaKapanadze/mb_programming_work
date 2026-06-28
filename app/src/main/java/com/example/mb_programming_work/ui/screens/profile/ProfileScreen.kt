@@ -46,7 +46,7 @@ fun ProfileScreen(
     onNavigateToFavorites: () -> Unit,
     onLogoutClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: ProfileViewModel = viewModel()
+    viewModel: ProfileViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -137,7 +137,13 @@ fun ProfileScreen(
             isPasswordVisible = state.isPasswordVisible,
             isLoading = state.isLoading,
             passwordChange = { viewModel.onEvent(ProfileEvent.OnPasswordChange(it)) },
-            passwordVisibilityChange = { viewModel.onEvent(ProfileEvent.OnPasswordVisibilityChange(it)) },
+            passwordVisibilityChange = {
+                viewModel.onEvent(
+                    ProfileEvent.OnPasswordVisibilityChange(
+                        it
+                    )
+                )
+            },
             onDeleteClick = { viewModel.onEvent(ProfileEvent.OnConfirmDeleteAccount) },
             onDismiss = { viewModel.onEvent(ProfileEvent.OnDismissBottomSheet) }
         )
