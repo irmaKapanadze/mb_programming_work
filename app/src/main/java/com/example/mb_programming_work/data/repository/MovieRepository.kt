@@ -1,4 +1,4 @@
-package com.example.mb_programming_work.data
+package com.example.mb_programming_work.data.repository
 
 import com.example.mb_programming_work.ui.screens.home.model.Movie
 import com.google.firebase.auth.FirebaseAuth

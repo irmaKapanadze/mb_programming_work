@@ -39,6 +39,7 @@ import com.example.mb_programming_work.R
 import com.example.mb_programming_work.ui.theme.MyTheme
 import com.example.mb_programming_work.ui.theme.components.MyAppButton
 import com.example.mb_programming_work.ui.theme.components.MyAppPasswordField
+import com.example.mb_programming_work.ui.theme.components.MyAppSwitch
 import com.example.mb_programming_work.vm.ProfileViewModel
 
 @Composable
@@ -49,6 +50,12 @@ fun ProfileScreen(
     viewModel: ProfileViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    val context = androidx.compose.ui.platform.LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.onEvent(ProfileEvent.LoadSavedTheme(context))
+    }
 
     LaunchedEffect(state.isSuccess) {
         if (state.isSuccess) {
@@ -108,6 +115,22 @@ fun ProfileScreen(
                     onClick = { onNavigateToFavorites() }
                 )
             }
+
+            Spacer(Modifier.height(24.dp))
+
+            SettingsItem(
+                title = stringResource(R.string.dark_theme),
+                textColor = MyTheme.colors.onBackground,
+                leadingIcon = painterResource(R.drawable.moon_svgrepo_com),
+                trailingContent = {
+                    MyAppSwitch(
+                        checked = state.isDarkThemeEnabled,
+                        onCheckedChange = { isEnabled ->
+                            viewModel.onEvent(ProfileEvent.OnDarkThemeChanged(isEnabled, context))
+                        }
+                    )
+                }
+            )
 
             Spacer(Modifier.height(24.dp))
 

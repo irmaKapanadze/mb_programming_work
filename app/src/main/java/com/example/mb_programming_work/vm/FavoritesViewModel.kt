@@ -2,7 +2,7 @@ package com.example.mb_programming_work.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mb_programming_work.data.MovieRepository
+import com.example.mb_programming_work.data.repository.MovieRepository
 import com.example.mb_programming_work.ui.screens.favorites.FavoritesEvent
 import com.example.mb_programming_work.ui.screens.favorites.FavoritesState
 import com.example.mb_programming_work.ui.screens.home.model.Movie

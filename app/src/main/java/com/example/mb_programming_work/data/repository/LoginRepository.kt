@@ -1,4 +1,4 @@
-package com.example.mb_programming_work.data
+package com.example.mb_programming_work.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await

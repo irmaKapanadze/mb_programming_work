@@ -5,7 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mb_programming_work.data.LoginRepository
+import com.example.mb_programming_work.data.repository.LoginRepository
 import com.example.mb_programming_work.ui.screens.login.LogInState
 import com.example.mb_programming_work.ui.screens.login.LoginEvent
 import kotlinx.coroutines.flow.MutableStateFlow

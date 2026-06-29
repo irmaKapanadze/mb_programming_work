@@ -5,7 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mb_programming_work.data.RegisterRepository
+import com.example.mb_programming_work.data.repository.RegisterRepository
 import com.example.mb_programming_work.ui.screens.register.RegisterEvent
 import com.example.mb_programming_work.ui.screens.register.RegisterState
 import kotlinx.coroutines.flow.MutableStateFlow

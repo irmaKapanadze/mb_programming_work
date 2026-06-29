@@ -2,7 +2,7 @@ package com.example.mb_programming_work.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mb_programming_work.data.MovieRepository
+import com.example.mb_programming_work.data.repository.MovieRepository
 import com.example.mb_programming_work.ui.screens.home.HomeEvent
 import com.example.mb_programming_work.ui.screens.home.HomeState
 import com.example.mb_programming_work.ui.screens.home.model.Movie
