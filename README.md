@@ -28,5 +28,5 @@
 * **UI:** Jetpack Compose (Material 3)
 * **Architecture:** MVVM + Repository Pattern
 * **Async & Streams:** Coroutines, Flow, StateFlow
-* **Backend:** Firebase Authentication, Cloud Firestore
+* **Backend:** Firebase Authentication, Firestore
 * **Image Loading:** Coil
